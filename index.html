@@ -10,37 +10,52 @@
 </head>
 <body>
 
+  <body>
+
   <h1>Qarena</h1>
   <div id="statusBox">Verbinde…</div>
 
-<div id="container">
+  <!-- ⭐ Hier kommt dein neues Layout rein -->
+  <div id="layout">
 
-  <!-- Lobby links -->
-  <div id="lobby">
-    <h2>Lobby</h2>
-    <ul id="lobbyList"></ul>
+      <!-- LOBBY -->
+      <aside id="lobby">
+          <h2>Lobby</h2>
+          <ul id="lobbyList"></ul>
+
+          <button id="startGameBtn">Spiel starten</button>
+      </aside>
+
+      <!-- SPIELFELD -->
+      <main id="spielfeld">
+          <h2>Spielfeld</h2>
+
+          <div id="playersGrid">
+              <div class="playerSlot" id="player1">Spieler 1</div>
+              <div class="playerSlot" id="player2">Spieler 2</div>
+              <div class="playerSlot" id="player3">Spieler 3</div>
+              <div class="playerSlot" id="player4">Spieler 4</div>
+          </div>
+
+          <div id="gameStatus"></div>
+      </main>
+
+      <!-- CHAT -->
+      <aside id="chat">
+          <h2>Chat</h2>
+          <div id="chatMessages"></div>
+
+          <div id="chatInputBox">
+              <input id="chatInput" type="text" placeholder="Nachricht eingeben...">
+              <button id="chatSend">Senden</button>
+          </div>
+      </aside>
+
   </div>
 
-  <!-- Spielfeld Mitte -->
-  <div id="gameArea">
-    <h2>Spielbereich</h2>
-    <div id="gameStatus"></div>
-  </div>
-
-  <!-- Chat rechts -->
-  <div id="chat">
-    <h2>Chat</h2>
-    <div id="chatMessages"></div>
-    <input id="chatInput" type="text" placeholder="Nachricht eingeben...">
-    <button id="chatSend">Senden</button>
-  </div>
-
-  <button id="startGameBtn">Spiel starten</button>
-
-</div>
-
-<!-- ⭐ Script MUSS ganz unten stehen -->
-<script src="client.js"></script>
+  <!-- Script bleibt ganz unten -->
+  <script src="client.js"></script>
 
 </body>
+
 </html>
