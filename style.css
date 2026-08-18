@@ -18,11 +18,8 @@ html, body {
     height: 100vh; /* gesamte Fensterhöhe */
     display: grid;
 
-    /* 3 Spalten: Lobby – Spielfeld – Chat */
     grid-template-columns: 250px 1fr 300px;
-
-    /* 1 feste Zeile → verhindert Wachsen */
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr; /* feste Zeilenhöhe */
 
     gap: 20px;
     padding: 20px;
@@ -39,17 +36,17 @@ html, body {
 #lobby {
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* verhindert Wachsen */
+    overflow: hidden;
     min-height: 0;
 }
 
 #lobby h2 {
-    margin-top: 0;
+    margin: 0 0 10px 0; /* verhindert Höhenwachstum */
 }
 
 #lobbyList {
     flex: 1;
-    overflow-y: auto; /* scrollt statt zu wachsen */
+    overflow-y: auto;
     min-height: 0;
 }
 
@@ -60,17 +57,17 @@ html, body {
 #spielfeld {
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* verhindert Wachsen */
+    overflow: hidden;
     min-height: 0;
 }
 
 #spielfeld h2 {
-    margin-top: 0;
+    margin: 0 0 10px 0;
 }
 
 #playersGrid {
     flex: 1;
-    overflow-y: auto; /* scrollt statt zu wachsen */
+    overflow-y: auto;
     min-height: 0;
 }
 
@@ -88,17 +85,17 @@ html, body {
 #chat {
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* verhindert Wachsen */
+    overflow: hidden;
     min-height: 0;
 }
 
 #chat h2 {
-    margin-top: 0;
+    margin: 0 0 10px 0;
 }
 
 #chatMessages {
     flex: 1;
-    overflow-y: auto; /* scrollt statt zu wachsen */
+    overflow-y: auto;
     min-height: 0;
 }
 
