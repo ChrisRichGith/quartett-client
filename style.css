@@ -76,6 +76,13 @@
     margin-top: 0;
 }
 
+#chat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* verhindert, dass der Container wächst */
+}
+
 #chatMessages {
     flex: 1;
     overflow-y: auto;
