@@ -1,6 +1,6 @@
 // WebSocket-Verbindung zum Server herstellen
 // WICHTIG: WSS für GitHub Pages (HTTPS)
-const socket = new WebSocket("wss://mountains-angels-chemicals-hospitality.trycloudflare.com");
+const socket = new WebSocket("wss://reference-pressure-acknowledged-complexity.trycloudflare.com");
 
 // Wenn Verbindung geöffnet ist
 socket.addEventListener("open", () => {
