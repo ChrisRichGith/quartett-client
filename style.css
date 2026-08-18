@@ -1,6 +1,12 @@
 /* ============================
    GLOBAL
 ============================ */
+body {
+    background: red !important;
+}
+#layout {
+    background: green !important;
+}
 
 html, body {
     margin: 0;
