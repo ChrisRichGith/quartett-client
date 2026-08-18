@@ -1,16 +1,16 @@
 /* --- Grundlayout --- */
 #layout {
     display: grid;
-    grid-template-rows: auto 1fr; /* obere Zeile + Hauptbereich */
     grid-template-columns: 250px 1fr 300px;
+    grid-template-rows: 1fr; /* ⭐ feste Zeilenhöhe */
     gap: 20px;
 
-    height: 100vh; /* gesamte Fensterhöhe */
+    height: calc(100vh - 120px); /* oder 100vh, wenn du oben fixierst */
     padding: 20px;
     box-sizing: border-box;
 
-    overflow: hidden; /* verhindert, dass das Grid wächst */
-    min-height: 0;    /* erlaubt Schrumpfen */
+    overflow: hidden; /* ⭐ verhindert, dass das Grid wächst */
+    min-height: 0;    /* ⭐ erlaubt Schrumpfen */
 }
 
 body {
