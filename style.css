@@ -1,109 +1,105 @@
-/* --- Grundlayout --- */
-#layout {
-    height: 100vh; /* ⭐ statt calc(...) */
-    display: grid;
-    grid-template-columns: 250px 1fr 300px;
-    grid-template-rows: 1fr; /* ⭐ feste Zeilenhöhe */
-    gap: 20px;
-
-    padding: 20px;
-    box-sizing: border-box;
-
-    overflow: hidden; /* ⭐ verhindert Wachsen */
-    min-height: 0;    /* ⭐ erlaubt Schrumpfen */
-    grid-template-rows: auto 1fr; /* obere Zeile + Hauptzeile */
-}
-
+/* ============================
+   GLOBAL
+============================ */
 
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* ⭐ verhindert Body-Scroll */
+    overflow: hidden; /* verhindert Body-Scroll */
+    font-family: Arial, sans-serif;
 }
 
-/* --- Boxen allgemein --- */
-#lobby, #spielfeld, #chat {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+/* ============================
+   LAYOUT-GRID
+============================ */
+
+#layout {
+    height: 100vh; /* gesamte Fensterhöhe */
+    display: grid;
+
+    /* 3 Spalten: Lobby – Spielfeld – Chat */
+    grid-template-columns: 250px 1fr 300px;
+
+    /* 1 feste Zeile → verhindert Wachsen */
+    grid-template-rows: 1fr;
+
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    overflow: hidden; /* verhindert Wachsen */
+    min-height: 0;    /* erlaubt Schrumpfen */
+}
+
+/* ============================
+   LOBBY
+============================ */
+
+#lobby {
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* verhindert Wachsen */
+    min-height: 0;
 }
 
-/* --- Lobby --- */
 #lobby h2 {
     margin-top: 0;
 }
 
-h1, #statusBox {
-    grid-column: 1 / span 3;
-}
-
 #lobbyList {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
+    flex: 1;
+    overflow-y: auto; /* scrollt statt zu wachsen */
+    min-height: 0;
 }
 
-#lobbyList li {
-    padding: 6px;
-    background: #eef2ff;
-    border-radius: 4px;
-    margin-bottom: 6px;
+/* ============================
+   SPIELFELD
+============================ */
+
+#spielfeld {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* verhindert Wachsen */
+    min-height: 0;
 }
 
-#startGameBtn {
-    margin-top: auto;
-    padding: 10px;
-    border: none;
-    background: #4a5cff;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/* --- Spielfeld --- */
 #spielfeld h2 {
     margin-top: 0;
 }
 
 #playersGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 150px 150px;
-    gap: 15px;
-    margin-bottom: 20px;
+    flex: 1;
+    overflow-y: auto; /* scrollt statt zu wachsen */
+    min-height: 0;
 }
 
 .playerSlot {
-    background: #e9ecff;
-    border: 2px solid #cdd3ff;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.1em;
+    padding: 10px;
+    background: #ddd;
+    margin-bottom: 10px;
+    border-radius: 6px;
 }
 
-/* --- Chat --- */
+/* ============================
+   CHAT
+============================ */
+
+#chat {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* verhindert Wachsen */
+    min-height: 0;
+}
+
 #chat h2 {
     margin-top: 0;
 }
 
-#chat {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* verhindert, dass der Container wächst */
-}
-
 #chatMessages {
     flex: 1;
-    overflow-y: auto;
-    min-height: 0; /* WICHTIG: erlaubt echtes Scrollen */
+    overflow-y: auto; /* scrollt statt zu wachsen */
+    min-height: 0;
 }
 
 #chatInputBox {
