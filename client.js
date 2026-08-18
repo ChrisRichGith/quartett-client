@@ -23,7 +23,7 @@ if (!playerName || !sessionCode) {
   window.location.href = "login.html";
 }
 
-const socket = new WebSocket("ws://quartettarena.duckdns.org:8080");
+const socket = new WebSocket("wss://reference-pressure-acknowledged-complexity.trycloudflare.com");
 
 const statusBox = document.getElementById("status");
 
