@@ -1,4 +1,4 @@
-// Login
+// Login-Weiterleitung
 document.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("loginBtn");
     if (loginBtn) {
@@ -18,14 +18,15 @@ if (!playerName || !sessionCode) {
 }
 
 let socket;
-let isConnected = false;   // verhindert Doppelverbindungen
+let isConnected = false;
 
+// WebSocket verbinden
 function connectWS() {
-    if (isConnected) return;   // verhindert doppelten Aufruf
+    if (isConnected) return;
 
     socket = new WebSocket("wss://harvest-uniform-competing-explain.trycloudflare.com");
 
-    const statusBox = document.getElementById("statusBox");   // ⭐ NEU: richtige ID
+    const statusBox = document.getElementById("statusBox");
     const lobbyList = document.getElementById("lobbyList");
     const chatMessages = document.getElementById("chatMessages");
 
@@ -37,7 +38,6 @@ function connectWS() {
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
 
-        // Server sendet Einladungscode → jetzt JOIN senden
         if (data.type === "inviteCode") {
             socket.send(JSON.stringify({
                 type: "join",
@@ -80,7 +80,7 @@ function connectWS() {
 
         if (data.type === "chat") {
             const div = document.createElement("div");
-            div.textContent = data.name + ": " + data.msg;
+            div.textContent = `${data.name}: ${data.msg}`;
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -97,18 +97,26 @@ function connectWS() {
     };
 }
 
-connectWS();
+// DOM vollständig geladen → jetzt Chat-Button sicher verfügbar
+document.addEventListener("DOMContentLoaded", () => {
 
-// Chat senden
-document.getElementById("chatSend").addEventListener("click", () => {
-    const msg = document.getElementById("chatInput").value;
-    if (msg.trim() === "") return;
+    connectWS(); // WebSocket erst starten, wenn DOM existiert
 
-    socket.send(JSON.stringify({
-        type: "chat",
-        name: playerName,
-        msg
-    }));
+    const chatSend = document.getElementById("chatSend");
+    const chatInput = document.getElementById("chatInput");
 
-    document.getElementById("chatInput").value = "";
+    if (chatSend) {
+        chatSend.addEventListener("click", () => {
+            const msg = chatInput.value.trim();
+            if (msg === "") return;
+
+            socket.send(JSON.stringify({
+                type: "chat",
+                name: playerName,
+                msg
+            }));
+
+            chatInput.value = "";
+        });
+    }
 });
