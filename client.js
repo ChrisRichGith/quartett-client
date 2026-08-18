@@ -84,6 +84,10 @@ function connectWS() {
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
+        if (data.type === "gameStarted") {
+            document.getElementById("gameStatus").innerText = "Spiel gestartet!";
+        }
+
     };
 
     socket.onclose = () => {
