@@ -1,17 +1,18 @@
 /* --- Grundlayout --- */
 #layout {
+    height: 100vh; /* ⭐ statt calc(...) */
     display: grid;
     grid-template-columns: 250px 1fr 300px;
     grid-template-rows: 1fr; /* ⭐ feste Zeilenhöhe */
     gap: 20px;
 
-    height: calc(100vh - 120px); /* oder 100vh, wenn du oben fixierst */
     padding: 20px;
     box-sizing: border-box;
 
-    overflow: hidden; /* ⭐ verhindert, dass das Grid wächst */
+    overflow: hidden; /* ⭐ verhindert Wachsen */
     min-height: 0;    /* ⭐ erlaubt Schrumpfen */
 }
+
 
 html, body {
     margin: 0;
