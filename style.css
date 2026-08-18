@@ -31,3 +31,48 @@ height: 100%;
     background: #333;
     border-radius: 10px;
 }
+#container {
+  display: flex;
+  height: 100vh;
+}
+
+#lobby {
+  width: 20%;
+  background: #222;
+  color: white;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#gameArea {
+  width: 60%;
+  padding: 10px;
+}
+
+#chat {
+  width: 20%;
+  background: #111;
+  color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  background: #000;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#chatInput {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+#chatSend {
+  width: 100%;
+  padding: 5px;
+}
