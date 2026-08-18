@@ -6,9 +6,8 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* verhindert Body-Scroll */
+    overflow: hidden;
     font-family: Arial, sans-serif;
-    background: #eef;
 }
 
 /* ============================
@@ -16,11 +15,11 @@ html, body {
 ============================ */
 
 #layout {
-    height: 100vh; /* gesamte Fensterhöhe */
+    height: 100vh;
     display: grid;
 
     grid-template-columns: 250px 1fr 300px;
-    grid-template-rows: 1fr; /* feste Zeilenhöhe */
+    grid-template-rows: 1fr;
 
     gap: 20px;
     padding: 20px;
@@ -31,19 +30,21 @@ html, body {
 }
 
 /* ============================
-   BOX-STYLING (sichtbare Rahmen)
+   BOX-STYLING
 ============================ */
 
 #lobby, #spielfeld, #chat {
-    border: 2px solid #ccc;      /* ⭐ Rahmen wieder sichtbar */
+    border: 2px solid #ccc;
     border-radius: 8px;
-    background: white;           /* ⭐ verhindert „Verschwinden“ */
-    padding: 15px;               /* ⭐ verhindert Zusammenschrumpfen */
+    background: white;
+    padding: 15px;
 
     display: flex;
     flex-direction: column;
+
+    flex: 1;        /* ⭐ verhindert Zusammenklappen */
+    min-height: 0;  /* ⭐ erlaubt Schrumpfen */
     overflow: hidden;
-    min-height: 0;
 }
 
 #lobby h2, #spielfeld h2, #chat h2 {
