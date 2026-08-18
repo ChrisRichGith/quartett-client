@@ -56,3 +56,18 @@ socket.onerror = () => {
 socket.onclose = () => {
   statusBox.innerText = "Verbindung geschlossen.";
 };
+socket.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+
+  if (data.type === "lobby") {
+    statusBox.innerText = "Lobby: " + data.players.join(", ");
+  }
+
+  if (data.type === "playerJoined") {
+    statusBox.innerText = data.name + " ist der Lobby beigetreten!";
+  }
+
+  if (data.type === "playerLeft") {
+    statusBox.innerText = "Spieler in Lobby: " + data.players.join(", ");
+  }
+};
