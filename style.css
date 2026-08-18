@@ -79,12 +79,7 @@
 #chatMessages {
     flex: 1;
     overflow-y: auto;
-    background: #f4f4f4;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    scroll-behavior: smooth;
+    min-height: 0; /* WICHTIG: erlaubt echtes Scrollen */
 }
 
 #chatInputBox {
