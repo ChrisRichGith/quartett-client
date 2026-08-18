@@ -5,7 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginBtn) {
         loginBtn.addEventListener("click", () => {
             const username = document.getElementById("username").value;
-            socket.send(JSON.stringify({ type: "login", username }));
+            const code = document.getElementById("sessionCode").value;
+
+            localStorage.setItem("playerName", username);
+            localStorage.setItem("sessionCode", code);
+
+            window.location.href = "index.html";
         });
     }
 });
@@ -22,8 +27,12 @@ if (!playerName || !sessionCode) {
 // WebSocket-Verbindung über Cloudflare Tunnel
 const socket = new WebSocket("wss://reference-pressure-acknowledged-complexity.trycloudflare.com");
 
-// Status-Anzeige
+// UI-Elemente
 const statusBox = document.getElementById("status");
+const lobbyList = document.getElementById("lobbyList");
+const chatMessages = document.getElementById("chatMessages");
+const chatInput = document.getElementById("chatInput");
+const chatSend = document.getElementById("chatSend");
 
 // Verbindung hergestellt
 socket.onopen = () => {
@@ -36,7 +45,7 @@ socket.onopen = () => {
     }));
 };
 
-// EINZIGER gemeinsamer onmessage-Handler
+// Nachrichten empfangen
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
 
@@ -49,17 +58,50 @@ socket.onmessage = (event) => {
     }
 
     if (data.type === "lobby") {
-        statusBox.innerText = "Lobby: " + data.players.join(", ");
+        lobbyList.innerHTML = "";
+        data.players.forEach(p => {
+            const li = document.createElement("li");
+            li.textContent = p;
+            lobbyList.appendChild(li);
+        });
     }
 
     if (data.type === "playerJoined") {
-        statusBox.innerText = data.name + " ist der Lobby beigetreten!";
+        const li = document.createElement("li");
+        li.textContent = data.name;
+        lobbyList.appendChild(li);
     }
 
     if (data.type === "playerLeft") {
-        statusBox.innerText = "Spieler in Lobby: " + data.players.join(", ");
+        lobbyList.innerHTML = "";
+        data.players.forEach(p => {
+            const li = document.createElement("li");
+            li.textContent = p;
+            lobbyList.appendChild(li);
+        });
+    }
+
+    if (data.type === "chat") {
+        const div = document.createElement("div");
+        div.textContent = data.name + ": " + data.msg;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 };
+
+// Chat senden
+chatSend.addEventListener("click", () => {
+    const msg = chatInput.value;
+    if (msg.trim() === "") return;
+
+    socket.send(JSON.stringify({
+        type: "chat",
+        name: playerName,
+        msg
+    }));
+
+    chatInput.value = "";
+});
 
 // Fehler
 socket.onerror = () => {
