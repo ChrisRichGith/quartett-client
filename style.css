@@ -1,6 +1,6 @@
 html, body {
     margin: 0;
-    padding: 0;        /* body-padding entfernen */
+    padding: 0;
     height: 100%;
     overflow: hidden;
     font-family: Arial, sans-serif;
@@ -34,7 +34,7 @@ html, body {
 
 h1, #statusBox {
     grid-column: 1 / span 3; /* über alle Spalten */
-    margin: 0;               /* verhindert Höhenwachstum */
+    margin: 0;
     padding: 10px;
 }
 
