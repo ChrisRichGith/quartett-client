@@ -81,14 +81,14 @@ function connectWS() {
         if (data.type === "chat") {
             const div = document.createElement("div");
             div.textContent = `${data.name}: ${data.msg}`;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        if (data.type === "gameStarted") {
-            document.getElementById("gameStatus").innerText = "Spiel gestartet!";
+
+            const chatBox = document.getElementById("chatMessages");
+            chatBox.appendChild(div);
+
+            // ⭐ Automatisch nach unten scrollen
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-    };
 
     socket.onclose = () => {
         isConnected = false;
