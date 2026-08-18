@@ -1,12 +1,6 @@
 /* ============================
    GLOBAL
 ============================ */
-body {
-    background: red !important;
-}
-#layout {
-    background: green !important;
-}
 
 html, body {
     margin: 0;
@@ -14,6 +8,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: Arial, sans-serif;
+    background: red !important;
 }
 
 /* ============================
@@ -33,6 +28,7 @@ html, body {
 
     overflow: hidden;
     min-height: 0;
+    background: green !important;
 }
 
 /* ============================
