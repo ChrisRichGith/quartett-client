@@ -42,9 +42,11 @@ html, body {
     display: flex;
     flex-direction: column;
 
-    flex: 1;        /* ⭐ verhindert Zusammenklappen */
-    min-height: 0;  /* ⭐ erlaubt Schrumpfen */
-    overflow: hidden;
+    /* ⭐ WICHTIG: KEIN height: 100% */
+    /* ⭐ WICHTIG: KEIN flex: 1 */
+
+    min-height: 0;    /* erlaubt Schrumpfen */
+    overflow: hidden; /* verhindert Herauswachsen */
 }
 
 #lobby h2, #spielfeld h2, #chat h2 {
@@ -56,7 +58,7 @@ html, body {
 ============================ */
 
 #lobbyList {
-    flex: 1;
+    flex: 1;          /* scrollbarer Bereich */
     overflow-y: auto;
     min-height: 0;
 }
