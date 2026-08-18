@@ -17,8 +17,8 @@ if (!playerName || !sessionCode) window.location.href = "login.html";
 
 let socket;
 function connectWS() {
-    socket = new WebSocket("wss://reference-pressure-acknowledged-complexity.trycloudflare.com");
-
+    socket = new WebSocket("wss://harvest-uniform-competing-explain.trycloudflare.com");
+    
     const statusBox = document.getElementById("status");
     const lobbyList = document.getElementById("lobbyList");
     const chatMessages = document.getElementById("chatMessages");
