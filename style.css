@@ -1,26 +1,55 @@
+/* --- Grundlayout --- */
 #layout {
     display: grid;
     grid-template-columns: 250px 1fr 300px;
     gap: 20px;
-    height: 90vh;
+    height: calc(100vh - 120px); /* Platz für Überschrift + Status */
     padding: 20px;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-/* LOBBY */
-#lobby {
-    background: #fff;
+/* --- Boxen allgemein --- */
+#lobby, #spielfeld, #chat {
+    background: #ffffff;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-/* SPIELFELD */
-#spielfeld {
-    background: #f7f7ff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+/* --- Lobby --- */
+#lobby h2 {
+    margin-top: 0;
+}
+
+#lobbyList {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+#lobbyList li {
+    padding: 6px;
+    background: #eef2ff;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+
+#startGameBtn {
+    margin-top: auto;
+    padding: 10px;
+    border: none;
+    background: #4a5cff;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* --- Spielfeld --- */
+#spielfeld h2 {
+    margin-top: 0;
 }
 
 #playersGrid {
@@ -28,7 +57,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 150px 150px;
     gap: 15px;
-    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .playerSlot {
@@ -39,23 +68,21 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    font-size: 1.1em;
 }
 
-/* CHAT */
-#chat {
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
+/* --- Chat --- */
+#chat h2 {
+    margin-top: 0;
 }
 
 #chatMessages {
     flex: 1;
     overflow-y: auto;
-    border: 1px solid #ddd;
+    background: #f4f4f4;
     padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
     margin-bottom: 10px;
 }
 
@@ -66,4 +93,16 @@
 
 #chatInput {
     flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#chatSend {
+    padding: 8px 12px;
+    background: #4a5cff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
