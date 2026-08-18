@@ -13,26 +13,46 @@ document.addEventListener("DOMContentLoaded", () => {
 const playerName = localStorage.getItem("playerName");
 const sessionCode = localStorage.getItem("sessionCode");
 
-if (!playerName || !sessionCode) window.location.href = "login.html";
+if (!playerName || !sessionCode) {
+    window.location.href = "login.html";
+}
 
 let socket;
+
 function connectWS() {
     socket = new WebSocket("wss://harvest-uniform-competing-explain.trycloudflare.com");
-    
+
     const statusBox = document.getElementById("status");
     const lobbyList = document.getElementById("lobbyList");
     const chatMessages = document.getElementById("chatMessages");
 
+    // Verbindung hergestellt
     socket.onopen = () => {
         statusBox.innerText = "Verbunden.";
-        socket.send(JSON.stringify({ type: "join", name: playerName, code: sessionCode }));
+        // WICHTIG: Join NICHT sofort senden!
+        // Erst warten, bis der Server inviteCode sendet.
     };
 
+    // Nachrichten empfangen
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
 
-        if (data.type === "error") statusBox.innerText = "Fehler: " + data.msg;
-        if (data.type === "welcome") statusBox.innerText = "Willkommen, " + data.name;
+        // Server sendet Einladungscode → Verbindung ist wirklich aktiv
+        if (data.type === "inviteCode") {
+            socket.send(JSON.stringify({
+                type: "join",
+                name: playerName,
+                code: sessionCode
+            }));
+        }
+
+        if (data.type === "error") {
+            statusBox.innerText = "Fehler: " + data.msg;
+        }
+
+        if (data.type === "welcome") {
+            statusBox.innerText = "Willkommen, " + data.name;
+        }
 
         if (data.type === "lobby") {
             lobbyList.innerHTML = "";
@@ -66,6 +86,7 @@ function connectWS() {
         }
     };
 
+    // Verbindung verloren → automatisch neu verbinden
     socket.onclose = () => {
         statusBox.innerText = "Verbindung verloren. Verbinde neu…";
         setTimeout(connectWS, 2000);
@@ -83,6 +104,11 @@ document.getElementById("chatSend").addEventListener("click", () => {
     const msg = document.getElementById("chatInput").value;
     if (msg.trim() === "") return;
 
-    socket.send(JSON.stringify({ type: "chat", name: playerName, msg }));
+    socket.send(JSON.stringify({
+        type: "chat",
+        name: playerName,
+        msg
+    }));
+
     document.getElementById("chatInput").value = "";
 });
