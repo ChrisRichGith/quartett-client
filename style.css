@@ -34,6 +34,10 @@ body {
     margin-top: 0;
 }
 
+h1, #statusBox {
+    grid-column: 1 / span 3; /* über alle Spalten */
+}
+
 #lobbyList {
     list-style: none;
     padding: 0;
