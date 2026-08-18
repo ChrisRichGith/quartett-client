@@ -26,18 +26,16 @@ function connectWS() {
     const lobbyList = document.getElementById("lobbyList");
     const chatMessages = document.getElementById("chatMessages");
 
-    // Verbindung hergestellt
     socket.onopen = () => {
         statusBox.innerText = "Verbunden.";
-        // WICHTIG: Join NICHT sofort senden!
-        // Erst warten, bis der Server inviteCode sendet.
+        // NICHT join senden!
+        // Erst wenn der Server inviteCode sendet.
     };
 
-    // Nachrichten empfangen
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
 
-        // Server sendet Einladungscode → Verbindung ist wirklich aktiv
+        // Server sendet Einladungscode → Verbindung steht wirklich
         if (data.type === "inviteCode") {
             socket.send(JSON.stringify({
                 type: "join",
@@ -86,7 +84,6 @@ function connectWS() {
         }
     };
 
-    // Verbindung verloren → automatisch neu verbinden
     socket.onclose = () => {
         statusBox.innerText = "Verbindung verloren. Verbinde neu…";
         setTimeout(connectWS, 2000);
