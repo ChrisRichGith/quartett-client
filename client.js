@@ -88,7 +88,7 @@ function connectWS() {
             // ⭐ Automatisch nach unten scrollen
             chatBox.scrollTop = chatBox.scrollHeight;
         }
-
+}
 
     socket.onclose = () => {
         isConnected = false;
