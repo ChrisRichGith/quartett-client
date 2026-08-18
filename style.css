@@ -37,7 +37,7 @@ html, body {
 }
 
 h1, #statusBox {
-    grid-column: 1 / span 3; /* über alle Spalten */
+    grid-column: 1 / span 3;
 }
 
 #lobbyList {
