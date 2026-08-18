@@ -117,6 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }));
 
             chatInput.value = "";
+    const startBtn = document.getElementById("startGameBtn");
+    if (startBtn) {
+        startBtn.addEventListener("click", () => {
+            socket.send(JSON.stringify({ type: "startGame" }));
         });
     }
 });
