@@ -18,8 +18,11 @@ if (!playerName || !sessionCode) {
 }
 
 let socket;
+let isConnected = false;   // 🔥 verhindert Doppelverbindungen
 
 function connectWS() {
+    if (isConnected) return;   // 🔥 verhindert doppelten Aufruf
+
     socket = new WebSocket("wss://harvest-uniform-competing-explain.trycloudflare.com");
 
     const statusBox = document.getElementById("status");
@@ -27,15 +30,13 @@ function connectWS() {
     const chatMessages = document.getElementById("chatMessages");
 
     socket.onopen = () => {
+        isConnected = true;   // 🔥 Verbindung markiert
         statusBox.innerText = "Verbunden.";
-        // NICHT join senden!
-        // Erst wenn der Server inviteCode sendet.
     };
 
     socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
 
-        // Server sendet Einladungscode → Verbindung steht wirklich
         if (data.type === "inviteCode") {
             socket.send(JSON.stringify({
                 type: "join",
@@ -85,6 +86,7 @@ function connectWS() {
     };
 
     socket.onclose = () => {
+        isConnected = false;   // 🔥 Verbindung verloren
         statusBox.innerText = "Verbindung verloren. Verbinde neu…";
         setTimeout(connectWS, 2000);
     };
