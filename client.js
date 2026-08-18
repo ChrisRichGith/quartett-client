@@ -10,17 +10,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Spielername + Sessioncode aus localStorage
 const playerName = localStorage.getItem("playerName");
 const sessionCode = localStorage.getItem("sessionCode");
 
+// Wenn nicht eingeloggt → zurück zur Login-Seite
 if (!playerName || !sessionCode) {
     window.location.href = "login.html";
 }
 
+// WebSocket-Verbindung über Cloudflare Tunnel
 const socket = new WebSocket("wss://reference-pressure-acknowledged-complexity.trycloudflare.com");
 
+// Status-Anzeige
 const statusBox = document.getElementById("status");
 
+// Verbindung hergestellt
 socket.onopen = () => {
     statusBox.innerText = "Verbunden. Warte auf Spielstart…";
 
@@ -31,6 +36,7 @@ socket.onopen = () => {
     }));
 };
 
+// EINZIGER gemeinsamer onmessage-Handler
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
 
@@ -55,10 +61,12 @@ socket.onmessage = (event) => {
     }
 };
 
+// Fehler
 socket.onerror = () => {
     statusBox.innerText = "Verbindungsfehler.";
 };
 
+// Verbindung geschlossen
 socket.onclose = () => {
     statusBox.innerText = "Verbindung geschlossen.";
 };
