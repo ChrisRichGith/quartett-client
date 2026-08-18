@@ -1,3 +1,21 @@
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Client gestartet");
+
+    // Beispiel: Login-Button
+    const loginBtn = document.getElementById("loginBtn");
+    if (loginBtn) {
+        loginBtn.addEventListener("click", () => {
+            const username = document.getElementById("username").value;
+            socket.send(JSON.stringify({ type: "login", username }));
+        });
+    }
+
+    // Beispiel: UI aktualisieren
+    function updateUI(data) {
+        // Deine UI-Logik hier
+        console.log("UI Update:", data);
+    }
+});
 const playerName = localStorage.getItem("playerName");
 const sessionCode = localStorage.getItem("sessionCode");
 
