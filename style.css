@@ -1,14 +1,9 @@
-/* ============================
-   GLOBAL
-============================ */
-
 html, body {
     margin: 0;
-    padding: 0;
+    padding: 0;        /* body-padding entfernen */
     height: 100%;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background: red !important;
 }
 
 /* ============================
@@ -19,8 +14,11 @@ html, body {
     height: 100vh;
     display: grid;
 
+    /* Header + Hauptbereich */
+    grid-template-rows: auto 1fr;
+
+    /* 3 Spalten */
     grid-template-columns: 250px 1fr 300px;
-    grid-template-rows: 1fr;
 
     gap: 20px;
     padding: 20px;
@@ -28,11 +26,20 @@ html, body {
 
     overflow: hidden;
     min-height: 0;
-    background: green !important;
 }
 
 /* ============================
-   BOX-STYLING
+   HEADER INS GRID
+============================ */
+
+h1, #statusBox {
+    grid-column: 1 / span 3; /* über alle Spalten */
+    margin: 0;               /* verhindert Höhenwachstum */
+    padding: 10px;
+}
+
+/* ============================
+   BOXEN
 ============================ */
 
 #lobby, #spielfeld, #chat {
@@ -44,11 +51,8 @@ html, body {
     display: flex;
     flex-direction: column;
 
-    /* ⭐ WICHTIG: KEIN height: 100% */
-    /* ⭐ WICHTIG: KEIN flex: 1 */
-
-    min-height: 0;    /* erlaubt Schrumpfen */
-    overflow: hidden; /* verhindert Herauswachsen */
+    min-height: 0;
+    overflow: hidden;
 }
 
 #lobby h2, #spielfeld h2, #chat h2 {
@@ -60,7 +64,7 @@ html, body {
 ============================ */
 
 #lobbyList {
-    flex: 1;          /* scrollbarer Bereich */
+    flex: 1;
     overflow-y: auto;
     min-height: 0;
 }
