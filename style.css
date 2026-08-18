@@ -11,6 +11,7 @@
 
     overflow: hidden; /* ⭐ verhindert Wachsen */
     min-height: 0;    /* ⭐ erlaubt Schrumpfen */
+    grid-template-rows: auto 1fr; /* obere Zeile + Hauptzeile */
 }
 
 
