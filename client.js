@@ -10,128 +10,64 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Spielername + Sessioncode aus localStorage
 const playerName = localStorage.getItem("playerName");
 const sessionCode = localStorage.getItem("sessionCode");
 
+// Wenn nicht eingeloggt → zurück zur Login-Seite
 if (!playerName || !sessionCode) {
-  window.location.href = "login.html";
+    window.location.href = "login.html";
 }
 
+// WebSocket-Verbindung über Cloudflare Tunnel
 const socket = new WebSocket("wss://reference-pressure-acknowledged-complexity.trycloudflare.com");
 
+// Status-Anzeige
 const statusBox = document.getElementById("status");
 
+// Verbindung hergestellt
 socket.onopen = () => {
-  statusBox.innerText = "Verbunden. Warte auf Spielstart…";
+    statusBox.innerText = "Verbunden. Warte auf Spielstart…";
 
-  socket.send(JSON.stringify({
-    type: "join",
-    name: playerName,
-    code: sessionCode
-  }));
+    socket.send(JSON.stringify({
+        type: "join",
+        name: playerName,
+        code: sessionCode
+    }));
 };
 
+// EINZIGER gemeinsamer onmessage-Handler
 socket.onmessage = (event) => {
-  const data = JSON.parse(event.data);
+    const data = JSON.parse(event.data);
 
-  if (data.type === "error") {
-    statusBox.innerText = "Fehler: " + data.msg;
-  }
-
-  if (data.type === "welcome") {
-    statusBox.innerText = "Willkommen, " + data.name + "!";
-  }
-
-  if (data.type === "lobby") {
-    statusBox.innerText = "Lobby: " + data.players.join(", ");
-  }
-
-  if (data.type === "playerJoined") {
-    statusBox.innerText = data.name + " ist der Lobby beigetreten!";
-  }
-
-  if (data.type === "playerLeft") {
-    statusBox.innerText = "Spieler in Lobby: " + data.players.join(", ");
-  }
-};
-
-socket.onerror = () => {
-  statusBox.innerText = "Verbindungsfehler.";
-};
-
-socket.onclose = () => {
-  statusBox.innerText = "Verbindung geschlossen.";
-};
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Client gestartet");
-
-    // Beispiel: Login-Button
-    const loginBtn = document.getElementById("loginBtn");
-    if (loginBtn) {
-        loginBtn.addEventListener("click", () => {
-            const username = document.getElementById("username").value;
-            socket.send(JSON.stringify({ type: "login", username }));
-        });
+    if (data.type === "error") {
+        statusBox.innerText = "Fehler: " + data.msg;
     }
 
-    // Beispiel: UI aktualisieren
-    function updateUI(data) {
-        // Deine UI-Logik hier
-        console.log("UI Update:", data);
+    if (data.type === "welcome") {
+        statusBox.innerText = "Willkommen, " + data.name;
     }
-});
-const playerName = localStorage.getItem("playerName");
-const sessionCode = localStorage.getItem("sessionCode");
 
-if (!playerName || !sessionCode) {
-  window.location.href = "login.html";
-}
+    if (data.type === "lobby") {
+        statusBox.innerText = "Lobby: " + data.players.join(", ");
+    }
 
-const socket = new WebSocket("wss://reference-pressure-acknowledged-complexity.trycloudflare.com");
+    if (data.type === "playerJoined") {
+        statusBox.innerText = data.name + " ist der Lobby beigetreten!";
+    }
 
-const statusBox = document.getElementById("status");
-
-socket.onopen = () => {
-  statusBox.innerText = "Verbunden. Warte auf Spielstart…";
-
-  socket.send(JSON.stringify({
-    type: "join",
-    name: playerName,
-    code: sessionCode
-  }));
+    if (data.type === "playerLeft") {
+        statusBox.innerText = "Spieler in Lobby: " + data.players.join(", ");
+    }
 };
 
-socket.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-
-  if (data.type === "error") {
-    statusBox.innerText = "Fehler: " + data.msg;
-  }
-
-  if (data.type === "welcome") {
-    statusBox.innerText = "Willkommen, " + data.name + "!";
-  }
-};
-
+// Fehler
 socket.onerror = () => {
-  statusBox.innerText = "Verbindungsfehler.";
+    statusBox.innerText = "Verbindungsfehler.";
 };
 
+// Verbindung geschlossen
 socket.onclose = () => {
-  statusBox.innerText = "Verbindung geschlossen.";
+    statusBox.innerText = "Verbindung geschlossen.";
 };
-socket.onmessage = (event) => {
-  const data = JSON.parse(event.data);
 
-  if (data.type === "lobby") {
-    statusBox.innerText = "Lobby: " + data.players.join(", ");
-  }
-
-  if (data.type === "playerJoined") {
-    statusBox.innerText = data.name + " ist der Lobby beigetreten!";
-  }
-
-  if (data.type === "playerLeft") {
-    statusBox.innerText = "Spieler in Lobby: " + data.players.join(", ");
-  }
-};
