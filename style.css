@@ -8,6 +8,7 @@ html, body {
     height: 100%;
     overflow: hidden; /* verhindert Body-Scroll */
     font-family: Arial, sans-serif;
+    background: #eef;
 }
 
 /* ============================
@@ -25,24 +26,33 @@ html, body {
     padding: 20px;
     box-sizing: border-box;
 
-    overflow: hidden; /* verhindert Wachsen */
-    min-height: 0;    /* erlaubt Schrumpfen */
+    overflow: hidden;
+    min-height: 0;
 }
 
 /* ============================
-   LOBBY
+   BOX-STYLING (sichtbare Rahmen)
 ============================ */
 
-#lobby {
+#lobby, #spielfeld, #chat {
+    border: 2px solid #ccc;      /* ⭐ Rahmen wieder sichtbar */
+    border-radius: 8px;
+    background: white;           /* ⭐ verhindert „Verschwinden“ */
+    padding: 15px;               /* ⭐ verhindert Zusammenschrumpfen */
+
     display: flex;
     flex-direction: column;
     overflow: hidden;
     min-height: 0;
 }
 
-#lobby h2 {
-    margin: 0 0 10px 0; /* verhindert Höhenwachstum */
+#lobby h2, #spielfeld h2, #chat h2 {
+    margin: 0 0 10px 0;
 }
+
+/* ============================
+   LOBBY
+============================ */
 
 #lobbyList {
     flex: 1;
@@ -50,20 +60,19 @@ html, body {
     min-height: 0;
 }
 
+#startGameBtn {
+    margin-top: 10px;
+    padding: 10px;
+    background: #4a5cff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 /* ============================
    SPIELFELD
 ============================ */
-
-#spielfeld {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    min-height: 0;
-}
-
-#spielfeld h2 {
-    margin: 0 0 10px 0;
-}
 
 #playersGrid {
     flex: 1;
@@ -81,17 +90,6 @@ html, body {
 /* ============================
    CHAT
 ============================ */
-
-#chat {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    min-height: 0;
-}
-
-#chat h2 {
-    margin: 0 0 10px 0;
-}
 
 #chatMessages {
     flex: 1;
