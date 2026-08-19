@@ -148,3 +148,59 @@ html, body {
     border-radius: 6px;
     cursor: pointer;
 }
+#table {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+    border-radius: 20px;
+}
+
+/* Alle Sitze */
+.seat {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Kartenstapel */
+.cardStack {
+    width: 80px;
+    height: 120px;
+    background: #ddd;
+    border-radius: 8px;
+    border: 2px solid #aaa;
+}
+
+/* Spielername */
+.playerName {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Positionen */
+#seat-top {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#seat-bottom {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#seat-left {
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#seat-right {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
