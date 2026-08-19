@@ -1,0 +1,221 @@
+/* =============================== */
+/* GLOBAL LAYOUT                  */
+/* =============================== */
+
+#deckUI {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    background: #0d0d0f; /* dunkles Fantasy-Hintergrund */
+    color: #ffffff;
+    font-family: 'Cinzel', serif; /* Fantasy-Schrift */
+}
+
+/* =============================== */
+/* LEFT SIDE: DETAIL PANEL        */
+/* =============================== */
+
+#detailPanel {
+    width: 40%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border-right: 2px solid rgba(255,255,255,0.1);
+}
+
+/* Artwork Frame */
+#detailArtworkFrame {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+#detailArtwork {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#detailRarityFrame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+}
+
+#detailName {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #fff;
+}
+
+#detailRarity {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* =============================== */
+/* STATS PANEL WITH GLYPHS        */
+/* =============================== */
+
+#detailStats {
+    margin-top: 20px;
+}
+
+.statRow {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.statRow:hover {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.statGlyph {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    filter: drop-shadow(0 0 6px #fff);
+}
+
+.statValue {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* =============================== */
+/* DESCRIPTION + BUTTONS          */
+/* =============================== */
+
+#detailDescription {
+    margin-top: 20px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+#detailButtons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+#detailButtons button {
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#detailButtons button:hover {
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+/* =============================== */
+/* DECK POWER METER               */
+/* =============================== */
+
+#deckPowerMeter {
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+
+.powerRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+}
+
+/* =============================== */
+/* RIGHT SIDE: GRID PANEL         */
+/* =============================== */
+
+#gridPanel {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* Sort & Filter */
+#gridControls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#gridControls select {
+    padding: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    border-radius: 6px;
+}
+
+/* Card Grid */
+#cardGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+/* Individual Card */
+.card {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.card:hover {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 12px rgba(255,255,255,0.3);
+}
+
+.card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.cardName {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cardStats {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.8;
+}
