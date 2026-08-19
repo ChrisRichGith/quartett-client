@@ -31,6 +31,7 @@ let myPlayerId = null;
 // ========================================
 // SPIELFELD: Spieler an Tisch setzen
 // ========================================
+import { updateTable, setMyPlayerId } from "./game.js";
 
 function updateTable(players, myId) {
     const seats = ["bottom", "right", "top", "left"];
