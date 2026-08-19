@@ -8,18 +8,24 @@ const SEATS = ["bottom", "right", "top", "left"];
 // Speichert die eigene Spieler-ID
 let myPlayerId = null;
 
-// Wird von client.js gesetzt
+// ========================================
+// Eigene Spieler-ID setzen (wird von client.js aufgerufen)
+// ========================================
 export function setMyPlayerId(id) {
     myPlayerId = id;
 }
 
+// ========================================
 // Spieler am Tisch anordnen
+// ========================================
 export function updateTable(players) {
     if (!myPlayerId) return;
 
+    // Index des eigenen Spielers finden
     const myIndex = players.findIndex(p => p.id === myPlayerId);
     if (myIndex === -1) return;
 
+    // Jeden Spieler relativ zur eigenen Position setzen
     players.forEach((player, i) => {
         const relativeIndex = (i - myIndex + players.length) % players.length;
         const seatId = SEATS[relativeIndex];
@@ -32,10 +38,20 @@ export function updateTable(players) {
 }
 
 // ========================================
-// Hier kommen später:
-// - Kartenlogik
-// - Rundenlogik
-// - Animationen
-// - Punkte
-// - usw.
+// Platz für zukünftige Spiellogik
 // ========================================
+
+// Beispiel: Karten verteilen
+export function dealCardsToPlayers(players, deck) {
+    // später implementierbar
+}
+
+// Beispiel: Runde starten
+export function startRound(players) {
+    // später implementierbar
+}
+
+// Beispiel: Karten spielen
+export function playCard(playerId, card) {
+    // später implementierbar
+}
