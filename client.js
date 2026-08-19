@@ -2,6 +2,7 @@
 // LOGIN-WEITERLEITUNG
 // ========================================
 import { updateTable, setMyPlayerId } from "./game.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("loginBtn");
     if (loginBtn) {
