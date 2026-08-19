@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Qarena Login</title>
-  <style>
-    body { font-family: Arial; background: #f4f4f4; padding: 40px; }
-    .box { background: white; padding: 20px; max-width: 300px; margin: auto; border-radius: 8px; }
-    input { width: 100%; padding: 10px; margin-top: 10px; }
-    button { width: 100%; padding: 10px; margin-top: 20px; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Quartett Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-  <div class="box">
-    <h2>Spiel beitreten</h2>
-    <input id="code" placeholder="Einladungscode">
-    <input id="name" placeholder="Dein Name">
-    <button onclick="join()">Beitreten</button>
-  </div>
 
-  <script>
-    function join() {
-      const code = document.getElementById("code").value.trim();
-      const name = document.getElementById("name").value.trim();
+<div class="login-container">
+    <h1>Quartett Login</h1>
 
-      if (!code || !name) {
-        alert("Bitte Name und Einladungscode eingeben.");
-        return;
-      }
+    <input id="playerName" type="text" placeholder="Spielername">
 
-      localStorage.setItem("playerName", name);
-      localStorage.setItem("sessionCode", code);
+    <input id="inviteCode" type="text" placeholder="Einladungscode">
 
-      window.location.href = "index.html";
-    }
-  </script>
-  <script src="login.js"></script>
+    <button id="btnLogin">Login</button>
 
+    <p id="errorMsg"></p>
+</div>
+
+<script src="login.js"></script>
 </body>
 </html>
