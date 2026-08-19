@@ -1,0 +1,123 @@
+<!-- Deck UI Container -->
+<div id="deckUI">
+
+    <!-- ========================= -->
+    <!-- LEFT SIDE: DETAIL CARD    -->
+    <!-- ========================= -->
+    <div id="detailPanel">
+
+        <!-- Monster Artwork -->
+        <div id="detailArtworkFrame">
+            <img id="detailArtwork" src="" alt="Monster Artwork">
+            <div id="detailRarityFrame"></div>
+            <div id="detailName"></div>
+            <div id="detailRarity"></div>
+        </div>
+
+        <!-- Stats Panel with Glyphs -->
+        <div id="detailStats">
+
+            <!-- Each stat row is theme‑controlled -->
+            <div class="statRow">
+                <img class="statGlyph" id="glyphSTR" src="">
+                <span class="statValue" id="valueSTR"></span>
+            </div>
+
+            <div class="statRow">
+                <img class="statGlyph" id="glyphDEX" src="">
+                <span class="statValue" id="valueDEX"></span>
+            </div>
+
+            <div class="statRow">
+                <img class="statGlyph" id="glyphINT" src="">
+                <span class="statValue" id="valueINT"></span>
+            </div>
+
+            <div class="statRow">
+                <img class="statGlyph" id="glyphHP" src="">
+                <span class="statValue" id="valueHP"></span>
+            </div>
+
+            <div class="statRow">
+                <img class="statGlyph" id="glyphCON" src="">
+                <span class="statValue" id="valueCON"></span>
+            </div>
+
+            <div class="statRow">
+                <img class="statGlyph" id="glyphWIS" src="">
+                <span class="statValue" id="valueWIS"></span>
+            </div>
+
+            <div class="statRow">
+                <img class="statGlyph" id="glyphCHA" src="">
+                <span class="statValue" id="valueCHA"></span>
+            </div>
+
+        </div>
+
+        <!-- Description + Buttons -->
+        <div id="detailDescription"></div>
+
+        <div id="detailButtons">
+            <button id="btnUpgrade">Aufwerten</button>
+            <button id="btnCompare">Vergleichen</button>
+            <button id="btnBackToDeck">Zurück zum Deck</button>
+        </div>
+
+        <!-- Deck Power Meter -->
+        <div id="deckPowerMeter">
+            <div class="powerRow">
+                <span>Durchschnitts‑STR:</span>
+                <span id="avgSTR"></span>
+            </div>
+            <div class="powerRow">
+                <span>Durchschnitts‑HP:</span>
+                <span id="avgHP"></span>
+            </div>
+            <div class="powerRow">
+                <span>Seltenheiten:</span>
+                <span id="rarityDistribution"></span>
+            </div>
+            <div class="powerRow">
+                <span>Deck‑Power:</span>
+                <span id="deckPower"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- RIGHT SIDE: CARD GRID     -->
+    <!-- ========================= -->
+    <div id="gridPanel">
+
+        <!-- Sort & Filter -->
+        <div id="gridControls">
+            <select id="sortSelect">
+                <option value="name">Name</option>
+                <option value="str">Stärke</option>
+                <option value="dex">Geschicklichkeit</option>
+                <option value="int">Intelligenz</option>
+                <option value="hp">Lebenspunkte</option>
+                <option value="rarity">Seltenheit</option>
+            </select>
+
+            <select id="filterSelect">
+                <option value="all">Alle</option>
+                <option value="legendary">Legendary</option>
+                <option value="epic">Epic</option>
+                <option value="rare">Rare</option>
+                <option value="common">Common</option>
+                <option value="str80">STR > 80</option>
+                <option value="hp150">HP > 150</option>
+            </select>
+        </div>
+
+        <!-- Card Grid -->
+        <div id="cardGrid">
+            <!-- JS will insert 25 cards here -->
+        </div>
+
+    </div>
+
+</div>
