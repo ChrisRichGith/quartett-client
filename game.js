@@ -33,7 +33,7 @@ export function updateTable(players) {
         const seat = document.getElementById("seat-" + seatId);
         if (!seat) return;
 
-        seat.querySelector(".playerName").textContent = player.name;
+        seat.querySelector(".playerName").textContent = player;
     });
 }
 
