@@ -69,6 +69,7 @@ function connectWS() {
         // SERVER: Lobby-Update
         // ----------------------------------------
         if (data.type === "lobby") {
+            console.log("Lobby players:", data.players);
             lobbyList.innerHTML = "";
 
             data.players.forEach(p => {
@@ -79,7 +80,6 @@ function connectWS() {
 
             updateTable(data.players); // ⭐ Spielfeld aktualisieren
         }
-console.log("Lobby players:", data.players);
 
         // ----------------------------------------
         // SERVER: Spieler beigetreten
