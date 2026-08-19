@@ -37,6 +37,7 @@ export function updateTable(players) {
     });
 }
 
+
 // ========================================
 // Platz für zukünftige Spiellogik
 // ========================================
