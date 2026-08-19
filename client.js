@@ -1,8 +1,11 @@
 // ========================================
-// LOGIN-WEITERLEITUNG
+// MODULE IMPORTS
 // ========================================
 import { updateTable, setMyPlayerId } from "./game.js";
 
+// ========================================
+// LOGIN CHECK
+// ========================================
 const playerName = localStorage.getItem("playerName");
 const sessionCode = localStorage.getItem("sessionCode");
 
@@ -13,15 +16,12 @@ if (!playerName || !sessionCode) {
 // ========================================
 // WEBSOCKET
 // ========================================
-
 let socket;
 let isConnected = false;
-let myPlayerId = null;
 
 // ========================================
 // WEBSOCKET VERBINDEN
 // ========================================
-
 function connectWS() {
     if (isConnected) return;
 
@@ -62,24 +62,23 @@ function connectWS() {
         // ----------------------------------------
         if (data.type === "welcome") {
             statusBox.innerText = "Willkommen, " + data.name;
-            setMyPlayerId(data.id);   // ⭐ eigene ID speichern
+            setMyPlayerId(data.id);   // ⭐ eigene ID an game.js übergeben
         }
-
 
         // ----------------------------------------
         // SERVER: Lobby-Update
         // ----------------------------------------
         if (data.type === "lobby") {
             lobbyList.innerHTML = "";
+
             data.players.forEach(p => {
                 const li = document.createElement("li");
                 li.textContent = p.name;
                 lobbyList.appendChild(li);
             });
 
-            updateTable(data.players); // ⭐ Spieler am Tisch anordnen
+            updateTable(data.players); // ⭐ Spielfeld aktualisieren
         }
-
 
         // ----------------------------------------
         // SERVER: Spieler beigetreten
@@ -101,7 +100,7 @@ function connectWS() {
                 lobbyList.appendChild(li);
             });
 
-            updateTable(data.players, myPlayerId);
+            updateTable(data.players);
         }
 
         // ----------------------------------------
@@ -130,7 +129,6 @@ function connectWS() {
 // ========================================
 // DOM geladen → Buttons aktivieren
 // ========================================
-
 document.addEventListener("DOMContentLoaded", () => {
 
     connectWS();
