@@ -74,7 +74,7 @@ function connectWS() {
 
             data.players.forEach(p => {
                 const li = document.createElement("li");
-                li.textContent = p.name;
+                li.textContent = p;
                 lobbyList.appendChild(li);
             });
 
