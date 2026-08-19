@@ -44,7 +44,7 @@ function updateLobby(lobby) {
         div.innerText =
             p.playerName +
             (p.isAdmin ? " (Admin)" : "") +
-            (p.isReady ? " ✔️" : " ❌");
+            (p.isReady ? " ✔️ Bereit" : " ❌ Nicht bereit");
 
         list.appendChild(div);
     });
