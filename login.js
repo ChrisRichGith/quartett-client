@@ -1,26 +1,29 @@
-// ========================================
-// LOGIN LOGIK – Nur für login.html
-// ========================================
+const socket = new WebSocket("ws://localhost:8080");
 
-document.addEventListener("DOMContentLoaded", () => {
+document.getElementById("btnLogin").onclick = () => {
+    const name = document.getElementById("playerName").value.trim();
+    const code = document.getElementById("inviteCode").value.trim();
 
-    const joinBtn = document.querySelector("button");
+    if (!name || !code) {
+        document.getElementById("errorMsg").innerText = "Bitte Name und Code eingeben.";
+        return;
+    }
 
-    joinBtn.addEventListener("click", () => {
-        const code = document.getElementById("code").value.trim();
-        const name = document.getElementById("name").value.trim();
+    socket.send(JSON.stringify({
+        action: "login",
+        playerName: name,
+        code: code
+    }));
+};
 
-        if (!code || !name) {
-            alert("Bitte Name und Einladungscode eingeben.");
-            return;
-        }
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
 
-        // Daten speichern
-        localStorage.setItem("playerName", name);
-        localStorage.setItem("sessionCode", code);
+    if (data.action === "inviteCodeInvalid") {
+        document.getElementById("errorMsg").innerText = "Einladungscode ist ungültig.";
+    }
 
-        // Weiter zur Hauptseite
-        window.location.href = "index.html";
-    });
-
-});
+    if (data.action === "loginSuccess") {
+        window.location.href = "lobby.html";
+    }
+};
