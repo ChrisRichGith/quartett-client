@@ -190,3 +190,102 @@ document.getElementById("btnUpgrade").onclick = () => {
 document.getElementById("btnCompare").onclick = () => {
     alert("Vergleichsmodus wird später implementiert.");
 };
+const socket = new WebSocket("ws://localhost:8080");
+
+// Profil aus der Lobby laden
+const profile = JSON.parse(sessionStorage.getItem("currentPlayer"));
+let deck = [];
+
+/* ============================================================
+   SERVER → CLIENT EVENTS
+   ============================================================ */
+
+socket.onopen = () => {
+    socket.send(JSON.stringify({
+        action: "loadDeck",
+        playerName: profile.playerName
+    }));
+};
+
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+
+    // Deck vom Server erhalten
+    if (data.action === "deckData") {
+        deck = data.deck;
+        renderDeckGrid();
+    }
+
+    // Deck wurde gespeichert
+    if (data.action === "deckSaved") {
+        alert("Deck gespeichert!");
+    }
+};
+
+/* ============================================================
+   DECK RENDERING
+   ============================================================ */
+
+function renderDeckGrid() {
+    const grid = document.getElementById("cardGrid");
+    grid.innerHTML = "";
+
+    deck.forEach(card => {
+        const div = document.createElement("div");
+        div.classList.add("card");
+
+        div.innerHTML = `
+            <img src="${card.image}">
+            <div class="cardName">${card.name}</div>
+            <div class="cardStats">STR: ${card.str} | HP: ${card.hp}</div>
+        `;
+
+        div.onclick = () => showDetail(card);
+
+        grid.appendChild(div);
+    });
+}
+
+/* ============================================================
+   DETAIL VIEW
+   ============================================================ */
+
+function showDetail(card) {
+    document.getElementById("detailName").textContent = card.name;
+    document.getElementById("detailArtwork").src = card.image;
+
+    document.getElementById("valueSTR").textContent = card.str;
+    document.getElementById("valueHP").textContent = card.hp;
+
+    document.getElementById("btnUpgrade").onclick = () => {
+        card.str += 5;
+        card.hp += 10;
+        renderDeckGrid();
+        showDetail(card);
+    };
+}
+
+/* ============================================================
+   DECK SPEICHERN
+   ============================================================ */
+
+document.getElementById("btnSaveDeck").onclick = () => {
+    socket.send(JSON.stringify({
+        action: "saveDeck",
+        playerName: profile.playerName,
+        deck
+    }));
+};
+
+/* ============================================================
+   ZURÜCK ZUR LOBBY
+   ============================================================ */
+
+document.getElementById("btnBackToLobby").onclick = () => {
+    socket.send(JSON.stringify({
+        action: "deckFinished",
+        playerName: profile.playerName
+    }));
+
+    window.location.href = "/ui/lobby/lobby.html";
+};
