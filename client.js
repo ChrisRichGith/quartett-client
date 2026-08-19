@@ -79,6 +79,7 @@ function connectWS() {
 
             updateTable(data.players); // ⭐ Spielfeld aktualisieren
         }
+console.log("Lobby players:", data.players);
 
         // ----------------------------------------
         // SERVER: Spieler beigetreten
