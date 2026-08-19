@@ -3,17 +3,6 @@
 // ========================================
 import { updateTable, setMyPlayerId } from "./game.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    const loginBtn = document.getElementById("loginBtn");
-    if (loginBtn) {
-        loginBtn.addEventListener("click", () => {
-            localStorage.setItem("playerName", document.getElementById("username").value);
-            localStorage.setItem("sessionCode", document.getElementById("sessionCode").value);
-            window.location.href = "index.html";
-        });
-    }
-});
-
 const playerName = localStorage.getItem("playerName");
 const sessionCode = localStorage.getItem("sessionCode");
 
