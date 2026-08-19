@@ -74,5 +74,39 @@ function broadcast(obj) {
         }
     });
 }
+/* ============================================================
+   LOAD DECK
+   ============================================================ */
+if (data.action === "loadDeck") {
+    const profile = loadProfile(data.playerName);
+
+    ws.send(JSON.stringify({
+        action: "deckData",
+        deck: profile.deck
+    }));
+}
+
+/* ============================================================
+   SAVE DECK
+   ============================================================ */
+if (data.action === "saveDeck") {
+    const profile = loadProfile(data.playerName);
+    profile.deck = data.deck;
+    saveProfile(profile);
+
+    ws.send(JSON.stringify({
+        action: "deckSaved"
+    }));
+}
+
+/* ============================================================
+   DECK FINISHED (zurück zur Lobby)
+   ============================================================ */
+if (data.action === "deckFinished") {
+    const player = lobby.players.find(p => p.playerName === data.playerName);
+    if (player) player.isReady = false;
+
+    broadcastLobby();
+}
 
 console.log("WebSocket Server läuft auf ws://localhost:8080");
