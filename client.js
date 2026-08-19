@@ -103,16 +103,15 @@ function connectWS() {
         // ----------------------------------------
         if (data.type === "lobby") {
             lobbyList.innerHTML = "";
-
             data.players.forEach(p => {
                 const li = document.createElement("li");
                 li.textContent = p.name;
                 lobbyList.appendChild(li);
             });
 
-            // ⭐ Spielfeld aktualisieren
-            updateTable(data.players, myPlayerId);
+            updateTable(data.players); // ⭐ Spieler am Tisch anordnen
         }
+
 
         // ----------------------------------------
         // SERVER: Spieler beigetreten
