@@ -24,6 +24,11 @@ socket.onmessage = (event) => {
     }
 
     if (data.action === "loginSuccess") {
+
+        // WICHTIG: Spielername speichern
+        localStorage.setItem("playerName", data.profile.playerName);
+
+        // Weiter zur Lobby
         window.location.href = "lobby.html";
     }
 };
