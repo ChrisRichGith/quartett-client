@@ -1,4 +1,9 @@
+// ========================================
+// LOGIN LOGIK – Nur für login.html
+// ========================================
+
 document.addEventListener("DOMContentLoaded", () => {
+
     const joinBtn = document.querySelector("button");
 
     joinBtn.addEventListener("click", () => {
@@ -10,9 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Daten speichern
         localStorage.setItem("playerName", name);
         localStorage.setItem("sessionCode", code);
 
+        // Weiter zur Hauptseite
         window.location.href = "index.html";
     });
+
 });
