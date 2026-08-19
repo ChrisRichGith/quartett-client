@@ -1,8 +1,28 @@
+/* ============================
+   GLOBAL
+============================ */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* verhindert Body-Scroll */
+    font-family: Arial, sans-serif;
+    background: #eef;
+}
+
+/* ============================
+   LAYOUT-GRID
+============================ */
+
 #layout {
-    height: 100vh;
+    height: 100vh; /* gesamte Fensterhöhe */
     display: grid;
 
+    /* Header + Hauptbereich */
     grid-template-rows: auto 1fr;
+
+    /* 3 Spalten */
     grid-template-columns: 250px 1fr 300px;
 
     gap: 20px;
@@ -13,10 +33,118 @@
     min-height: 0;
 }
 
+/* ============================
+   HEADER
+============================ */
+
 #header {
     grid-column: 1 / span 3;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    background: white;
     padding: 10px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+#header h1 {
+    margin: 0;
+}
+
+#statusBox {
+    margin: 0;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+}
+
+/* ============================
+   BOX-STYLING
+============================ */
+
+#lobby, #spielfeld, #chat {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;    /* erlaubt Schrumpfen */
+    overflow: hidden; /* verhindert Herauswachsen */
+}
+
+#lobby h2, #spielfeld h2, #chat h2 {
+    margin: 0 0 10px 0;
+}
+
+/* ============================
+   LOBBY
+============================ */
+
+#lobbyList {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+#startGameBtn {
+    margin-top: 10px;
+    padding: 10px;
+    background: #4a5cff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ============================
+   SPIELFELD
+============================ */
+
+#playersGrid {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.playerSlot {
+    padding: 10px;
+    background: #ddd;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+/* ============================
+   CHAT
+============================ */
+
+#chatMessages {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+#chatInputBox {
+    display: flex;
+    gap: 10px;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#chatSend {
+    padding: 8px 12px;
+    background: #4a5cff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
