@@ -94,8 +94,9 @@ function connectWS() {
         // ----------------------------------------
         if (data.type === "welcome") {
             statusBox.innerText = "Willkommen, " + data.name;
-            myPlayerId = data.id;   // ⭐ WICHTIG
+            setMyPlayerId(data.id);   // ⭐ eigene ID speichern
         }
+
 
         // ----------------------------------------
         // SERVER: Lobby-Update
