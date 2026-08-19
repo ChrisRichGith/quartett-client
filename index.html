@@ -22,31 +22,7 @@
           <ul id="lobbyList"></ul>
           <button id="startGameBtn">Spiel starten</button>
       </aside>
-      function updateTable(players, myId) {
-    // Reihenfolge der Sitzplätze im Uhrzeigersinn
-    const seats = ["bottom", "right", "top", "left"];
-
-    // Index des eigenen Spielers
-    const myIndex = players.findIndex(p => p.id === myId);
-
-    players.forEach((player, i) => {
-        // relative Position berechnen
-        const relativeIndex = (i - myIndex + players.length) % players.length;
-
-        // Sitzplatz bestimmen
-        const seatId = seats[relativeIndex];
-
-        // HTML-Element holen
-        const seat = document.getElementById("seat-" + seatId);
-
-        // Name setzen
-        seat.querySelector(".playerName").textContent = player.name;
-
-        // Kartenstapel könnte später dynamisch befüllt werden
-        // seat.querySelector(".cardStack").innerHTML = ...
-    });
-}
-
+      
       <!-- SPIELFELD -->
       <main id="spielfeld">
           <h2>Spielfeld</h2>
