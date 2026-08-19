@@ -1,7 +1,7 @@
 // ========================================
 // LOGIN-WEITERLEITUNG
 // ========================================
-
+import { updateTable, setMyPlayerId } from "./game.js";
 document.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("loginBtn");
     if (loginBtn) {
@@ -31,7 +31,6 @@ let myPlayerId = null;
 // ========================================
 // SPIELFELD: Spieler an Tisch setzen
 // ========================================
-import { updateTable, setMyPlayerId } from "./game.js";
 
 function updateTable(players, myId) {
     const seats = ["bottom", "right", "top", "left"];
