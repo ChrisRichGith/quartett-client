@@ -21,11 +21,11 @@ export function setMyPlayerId(id) {
 export function updateTable(players) {
     if (!myPlayerId) return;
 
-    // Index des eigenen Spielers finden
-    const myIndex = players.findIndex(p => p.id === myPlayerId);
+    const myIndex = players.findIndex(p => p === myPlayerId);
     if (myIndex === -1) return;
 
-    // Jeden Spieler relativ zur eigenen Position setzen
+    const SEATS = ["bottom", "right", "top", "left"];
+
     players.forEach((player, i) => {
         const relativeIndex = (i - myIndex + players.length) % players.length;
         const seatId = SEATS[relativeIndex];
