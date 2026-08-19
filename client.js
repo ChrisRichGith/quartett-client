@@ -19,27 +19,6 @@ let isConnected = false;
 let myPlayerId = null;
 
 // ========================================
-// SPIELFELD: Spieler an Tisch setzen
-// ========================================
-
-function updateTable(players, myId) {
-    const seats = ["bottom", "right", "top", "left"];
-
-    const myIndex = players.findIndex(p => p.id === myId);
-    if (myIndex === -1) return;
-
-    players.forEach((player, i) => {
-        const relativeIndex = (i - myIndex + players.length) % players.length;
-        const seatId = seats[relativeIndex];
-
-        const seat = document.getElementById("seat-" + seatId);
-        if (!seat) return;
-
-        seat.querySelector(".playerName").textContent = player.name;
-    });
-}
-
-// ========================================
 // WEBSOCKET VERBINDEN
 // ========================================
 
