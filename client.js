@@ -62,7 +62,7 @@ function connectWS() {
         // ----------------------------------------
         if (data.type === "welcome") {
             statusBox.innerText = "Willkommen, " + data.name;
-            setMyPlayerId(data.id);   // ⭐ eigene ID an game.js übergeben
+            setMyPlayerId(data.name);   // ⭐ eigene ID an game.js übergeben
         }
 
         // ----------------------------------------
