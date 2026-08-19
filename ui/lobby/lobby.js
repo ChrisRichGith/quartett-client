@@ -1,5 +1,6 @@
-// Verbindung zu deinem Server-PlayerManager
-import { handleLogin, playerReady, adminStart, lobby } from "/server/playerdata/playerManager.js";
+const socket = new WebSocket("ws://localhost:8080");
+
+let localPlayer = null;
 
 /* ============================================================
    LOGIN
@@ -9,22 +10,45 @@ document.getElementById("btnLogin").onclick = () => {
     const name = document.getElementById("playerNameInput").value.trim();
     if (!name) return;
 
-    const profile = handleLogin(name);
+    socket.send(JSON.stringify({
+        action: "login",
+        playerName: name
+    }));
+};
 
-    // Login Panel ausblenden
-    document.getElementById("loginPanel").style.display = "none";
+/* ============================================================
+   SERVER → CLIENT EVENTS
+   ============================================================ */
 
-    // Lobby Panel anzeigen
-    document.getElementById("lobbyPanel").style.display = "block";
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
 
-    renderLobby(profile);
+    // Login erfolgreich
+    if (data.action === "loginSuccess") {
+        localPlayer = data.profile;
+
+        document.getElementById("loginPanel").style.display = "none";
+        document.getElementById("lobbyPanel").style.display = "block";
+
+        renderLobby(data.lobby);
+    }
+
+    // Lobby Update
+    if (data.action === "lobbyUpdate") {
+        renderLobby(data.lobby);
+    }
+
+    // Spielstart
+    if (data.action === "gameStart") {
+        window.location.href = "/ui/game/game.html";
+    }
 };
 
 /* ============================================================
    LOBBY RENDERING
    ============================================================ */
 
-function renderLobby(profile) {
+function renderLobby(lobby) {
     const list = document.getElementById("playerList");
     list.innerHTML = "";
 
@@ -42,10 +66,12 @@ function renderLobby(profile) {
     });
 
     // Buttons anzeigen
-    if (profile.isAdmin) {
+    if (localPlayer.isAdmin) {
         document.getElementById("btnStartGame").style.display = "inline-block";
+        document.getElementById("btnReady").style.display = "none";
     } else {
         document.getElementById("btnReady").style.display = "inline-block";
+        document.getElementById("btnStartGame").style.display = "none";
     }
 }
 
@@ -54,9 +80,10 @@ function renderLobby(profile) {
    ============================================================ */
 
 document.getElementById("btnReady").onclick = () => {
-    const name = document.getElementById("playerNameInput").value.trim();
-    playerReady(name);
-    renderLobby(loadProfile(name));
+    socket.send(JSON.stringify({
+        action: "playerReady",
+        playerName: localPlayer.playerName
+    }));
 };
 
 /* ============================================================
@@ -64,16 +91,10 @@ document.getElementById("btnReady").onclick = () => {
    ============================================================ */
 
 document.getElementById("btnStartGame").onclick = () => {
-    const name = document.getElementById("playerNameInput").value.trim();
-    const result = adminStart(name);
-
-    if (!result.success) {
-        alert(result.message);
-        return;
-    }
-
-    alert("Spiel startet!");
-    // Hier später: Wechsel ins eigentliche Spiel
+    socket.send(JSON.stringify({
+        action: "adminStart",
+        playerName: localPlayer.playerName
+    }));
 };
 
 /* ============================================================
@@ -81,5 +102,6 @@ document.getElementById("btnStartGame").onclick = () => {
    ============================================================ */
 
 document.getElementById("btnOpenDeck").onclick = () => {
+    sessionStorage.setItem("currentPlayer", JSON.stringify(localPlayer));
     window.location.href = "/ui/deck/fantasy/deck-ui.html";
 };
