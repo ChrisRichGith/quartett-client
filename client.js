@@ -24,7 +24,7 @@ let isConnected = false;
 function connectWS() {
     if (isConnected) return;
 
-    socket = new WebSocket("wss://harvest-uniform-competing-explain.trycloudflare.com");
+    socket = new WebSocket("wss://homework-mistress-families-ban.trycloudflare.com");
 
     const statusBox = document.getElementById("statusBox");
     const lobbyList = document.getElementById("lobbyList");
